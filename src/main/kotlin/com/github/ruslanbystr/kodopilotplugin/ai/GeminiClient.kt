@@ -1,5 +1,6 @@
-package com.github.ruslanbystr.kodopilotplugin.gemini
+package com.github.ruslanbystr.kodopilotplugin.ai
 
+import com.google.gson.Gson
 import com.google.gson.JsonParser
 import java.net.URI
 import java.net.http.HttpClient
@@ -24,11 +25,13 @@ class GeminiClient(private val apiKey: String) {
             }
         """.trimIndent()
 
+        val model = LLModel.GEMINI_2_5_PRO
+
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"))
+            .uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models/${model.modelName}:generateContent"))
             .header("Content-Type", "application/json")
             .header("x-goog-api-key", apiKey)
-            .timeout(Duration.ofSeconds(60))
+            .timeout(Duration.ofSeconds(120))
             .POST(HttpRequest.BodyPublishers.ofString(requestBodyJson))
             .build()
 
@@ -46,7 +49,7 @@ class GeminiClient(private val apiKey: String) {
     }
 
     private fun gsonEscape(text: String): String {
-        val gson = com.google.gson.Gson()
+        val gson = Gson()
         return gson.toJson(text)
     }
 }

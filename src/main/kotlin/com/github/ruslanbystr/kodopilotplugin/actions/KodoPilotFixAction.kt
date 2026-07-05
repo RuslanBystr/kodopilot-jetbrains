@@ -1,6 +1,6 @@
 package com.github.ruslanbystr.kodopilotplugin.actions
 
-import com.github.ruslanbystr.kodopilotplugin.gemini.GeminiClient
+import com.github.ruslanbystr.kodopilotplugin.ai.GeminiClient
 import com.github.ruslanbystr.kodopilotplugin.settings.KodoPilotSettingsState
 import com.google.gson.JsonParser
 import com.intellij.notification.NotificationGroupManager
@@ -46,14 +46,26 @@ class KodoPilotFixAction : AnAction() {
             contextBuilder.append("${line + 1}: ${document.getText(com.intellij.openapi.util.TextRange(lineStart, lineEnd))}$marker\n")
         }
 
+        val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
+        val fileName = virtualFile?.name ?: "Unknown"
+        val filePath = virtualFile?.path ?: "Unknown"
+        val psiFile = e.getData(CommonDataKeys.PSI_FILE)
+        val language = psiFile?.language?.id ?: "Unknown"
+
         val prompt = """
-            You are a code assistant embedded in an IDE. Below is a snippet of code with line numbers.
+            You are a code assistant embedded in an IDE.
+        
+            File name: $fileName
+            File path: $filePath
+            Language: $language
+        
+            Below is a snippet of code with line numbers.
             The cursor is marked with "<-- CURSOR HERE".
             Find the most likely problem on or near that line and propose a fix.
-
+        
             Respond ONLY with valid JSON, no markdown, no code fences, in this exact format:
             {"startLine": <int>, "endLine": <int>, "explanation": "<short explanation>", "newText": "<replacement code for those lines, without line numbers>"}
-
+        
             Code:
             $contextBuilder
         """.trimIndent()

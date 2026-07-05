@@ -42,7 +42,17 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
 
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt K"/>
+            <keyboard-shortcut keymap="$default" />
+        </action>
+        <action
+                id="KodoPilot.AskAiAction"
+                class="com.github.ruslanbystr.kodopilotplugin.actions.AskAiAction"
+                text="Ask AI"
+                description="Edit current file using AI"
+                icon="/icons/ai-sparkle-13x13.svg">
+
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt g"/>
         </action>
     </actions>
 </idea-plugin>
