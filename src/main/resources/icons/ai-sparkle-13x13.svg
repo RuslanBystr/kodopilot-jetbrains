@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
+    <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#5ee8d0"/>
+            <stop offset="100%" stop-color="#1a8fa8"/>
+        </linearGradient>
+    </defs>
+    <!-- Main 4-pointed sparkle, center 6.5,6.5, outer r=6, inner r=1.4 -->
+    <path fill="url(#g)"
+          d="M6.5,0.5 L7.49,5.51 L12.5,6.5 L7.49,7.49 L6.5,12.5 L5.51,7.49 L0.5,6.5 L5.51,5.51 Z"/>
+    <!-- Small satellite dot — top-right, signals "secondary sparkle" -->
+    <circle cx="10.5" cy="2.5" r="1.1" fill="#5ee8d0" opacity="0.85"/>
+</svg>

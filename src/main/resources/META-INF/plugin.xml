@@ -1,19 +1,48 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.ruslanbystr.kodopilotplugin</id>
-    <name>kodopilot-plugin</name>
-    <vendor>ruslanbystr</vendor>
+    <name>KodoPilot</name>
+    <vendor>Bystranskyi R.R.</vendor>
     <description><![CDATA[
-        <p><b>kodopilot-plugin</b> is a repository that provides a pure template to make it easier to create a new plugin project.</p>
-        <p>The main goal of this template is to speed up the setup phase of plugin development for both new and experienced developers by preconfiguring the project scaffold and CI, linking to the proper documentation pages, and keeping everything organized.</p>
-    ]]></description>
+<p><b>KodoPilot</b> is an AI-powered plugin that enhances your development workflow with LLM-driven code assistance, helping you write, refactor, and understand code faster and more efficiently.</p>
+]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.ruslanbystr.kodopilotplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.ruslanbystr.kodopilotplugin.settings.KodoPilotSettingsConfigurable"
+                id="com.github.ruslanbystr.kodopilotplugin.settings.KodoPilotSettingsConfigurable"
+                displayName="KodoPilot"
+        />
+
+        <notificationGroup id="KodoPilot Notifications" displayType="BALLOON"/>
+
+        <toolWindow
+                factoryClass="com.github.ruslanbystr.kodopilotplugin.toolWindow.MyToolWindowFactory"
+                id="KodoPilot"
+                icon="/icons/kodopilot.svg"
+        />
+
         <postStartupActivity implementation="com.github.ruslanbystr.kodopilotplugin.startup.MyProjectActivity" />
     </extensions>
+
+    <actions>
+        <action
+            id="KodoPilot.KodoPilotFixAction"
+            class="com.github.ruslanbystr.kodopilotplugin.actions.KodoPilotFixAction"
+            text="Fix/Refactor Code"
+            description="AI powered analyzing"
+            icon="/icons/ai-sparkle-13x13.svg"
+        >
+
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt K"/>
+        </action>
+    </actions>
 </idea-plugin>
