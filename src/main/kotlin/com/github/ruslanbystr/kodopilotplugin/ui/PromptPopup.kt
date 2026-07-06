@@ -30,7 +30,7 @@ class PromptPopup(
 ) {
 
     private val aiIcon = IconLoader.getIcon(
-        "/icons/ai-sparkle-13x13.svg",
+        "/icons/ai-prompt-terminal-13x13.svg",
         PromptPopup::class.java
     )
 

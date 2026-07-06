@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
+  <!-- Input field: faint teal fill + crisp stroke -->
+  <rect x="0.75" y="2.75" width="11.5" height="7.5" rx="2"
+        fill="#1a8fa8" fill-opacity="0.18"
+        stroke="#2bbfcc" stroke-width="1.2"/>
+  <!-- Terminal ">" prompt glyph -->
+  <path d="M3,5.5 L5,6.75 L3,8"
+        fill="none" stroke="#5ee8d0" stroke-width="1.35"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Cursor bar -->
+  <rect x="6.25" y="4.75" width="1" height="3.5" rx="0.4"
+        fill="#5ee8d0" opacity="0.85"/>
+</svg>
