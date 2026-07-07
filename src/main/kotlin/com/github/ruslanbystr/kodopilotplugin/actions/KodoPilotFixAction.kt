@@ -21,12 +21,12 @@ class KodoPilotFixAction : AnAction() {
         val project: Project = e.project ?: return
         val editor = e.getData(CommonDataKeys.EDITOR) ?: return
 
-        val apiKey = KodoPilotSettingsState.instance.apiKey
+        val apiKey = KodoPilotSettingsState.instance.currentApiKey
 
         if (apiKey.isNullOrBlank()) {
             val notification = NotificationGroupManager.getInstance()
                 .getNotificationGroup("KodoPilot Notifications")
-                .createNotification("API-key Gemini is not set. Settings → Tools → KodoPilot", NotificationType.WARNING)
+                .createNotification("API-key is not set. Settings → Tools → KodoPilot", NotificationType.WARNING)
             notification.notify(project)
             return
         }
@@ -72,9 +72,18 @@ class KodoPilotFixAction : AnAction() {
 
         ProgressManager.getInstance().run(object : Task.Backgroundable(project, "KodoPilot: analyzing", true) {
             override fun run(indicator: ProgressIndicator) {
+                indicator.isIndeterminate = true
+                indicator.text = "KodoPilot"
+                indicator.text2 = "Sending request to LLM..."
+
                 try {
                     val client = GeminiClient(apiKey)
+
+                    indicator.text2 = "Waiting for AI response..."
+
                     val rawResponse = client.generateContent(prompt)
+
+                    indicator.text2 = "Parsing response..."
 
                     val cleaned = rawResponse
                         .trim()
@@ -88,6 +97,8 @@ class KodoPilotFixAction : AnAction() {
                     val endLine = json.get("endLine").asInt - 1
                     val newText = json.get("newText").asString
                     val explanation = json.get("explanation").asString
+
+                    indicator.text2 = "Applying changes..."
 
                     ApplicationManager.getApplication().invokeLater {
                         applyFix(project, editor.document, startLine, endLine, newText)

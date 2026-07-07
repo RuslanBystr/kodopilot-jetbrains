@@ -51,6 +51,10 @@ class PromptPopup(
         }
 
         textField.foreground = UIUtil.getLabelForeground()
+        textField.background = JBColor(
+            Color(0xFFFFFF),
+            Color(0x3C3F41)
+        )
         textField.caretColor = textColor
         textField.font = textField.font.deriveFont(16f)
 
@@ -74,6 +78,11 @@ class PromptPopup(
         val panel = JPanel(BorderLayout(JBUI.scale(8), JBUI.scale(10))).apply {
             border = JBUI.Borders.empty(12)
             isOpaque = true
+
+            background = JBColor(
+                Color(0xFFFFFF),
+                Color(0x2B2D30)
+            )
 
             add(header, BorderLayout.NORTH)
             add(textField, BorderLayout.CENTER)

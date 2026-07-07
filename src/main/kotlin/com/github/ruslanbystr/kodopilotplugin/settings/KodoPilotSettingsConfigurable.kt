@@ -13,22 +13,33 @@ class KodoPilotSettingsConfigurable : Configurable {
         settingsComponent?.getPreferredFocusedComponent()
 
     override fun createComponent(): JComponent {
-        val component = KodoPilotSettings()
-        settingsComponent = component
-        return component.panel
+        return KodoPilotSettings().also {
+            settingsComponent = it
+        }.panel
     }
 
     override fun isModified(): Boolean {
-        return settingsComponent?.apiKey != KodoPilotSettingsState.instance.apiKey
+        val settings = KodoPilotSettingsState.instance
+        val component = settingsComponent ?: return false
+
+        return component.provider != settings.provider ||
+                component.apiKey != settings.currentApiKey
     }
 
     override fun apply() {
-        println("Saving: ${settingsComponent?.apiKey}")
-        KodoPilotSettingsState.instance.apiKey = settingsComponent?.apiKey ?: ""
+        val settings = KodoPilotSettingsState.instance
+        val component = settingsComponent ?: return
+
+        settings.provider = component.provider ?: return
+        settings.setApiKey(apiKey = component.apiKey)
     }
 
     override fun reset() {
-        settingsComponent?.apiKey = KodoPilotSettingsState.instance.apiKey
+        val settings = KodoPilotSettingsState.instance
+        val component = settingsComponent ?: return
+
+        component.provider = settings.provider
+        component.apiKey = settings.currentApiKey
     }
 
     override fun disposeUIResources() {

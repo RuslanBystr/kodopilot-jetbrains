@@ -40,7 +40,7 @@ class AiEditService(
         editor: Editor,
         prompt: String
     ) {
-        val apiKey = KodoPilotSettingsState.instance.apiKey
+        val apiKey = KodoPilotSettingsState.instance.currentApiKey
 
         if (apiKey.isBlank()) {
             notify(

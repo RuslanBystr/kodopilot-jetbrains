@@ -1,9 +1,10 @@
 package com.github.ruslanbystr.kodopilotplugin.settings
 
+import com.github.ruslanbystr.kodopilotplugin.ai.LLMProvider
+import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
-import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.service
 
 @Service(Service.Level.APP)
@@ -14,7 +15,12 @@ import com.intellij.openapi.components.service
 class KodoPilotSettingsState : PersistentStateComponent<KodoPilotSettingsState.State> {
 
     data class State(
-        var apiKey: String = ""
+        var provider: LLMProvider = LLMProvider.GEMINI,
+
+        var geminiApiKey: String = "",
+        var openAiApiKey: String = "",
+        var anthropicApiKey: String = "",
+        var groqApiKey: String = ""
     )
 
     private var state = State()
@@ -25,11 +31,35 @@ class KodoPilotSettingsState : PersistentStateComponent<KodoPilotSettingsState.S
         this.state = state
     }
 
-    var apiKey: String
-        get() = state.apiKey
+    var provider: LLMProvider
+        get() = state.provider
         set(value) {
-            state.apiKey = value
+            state.provider = value
         }
+
+    fun getApiKey(provider: LLMProvider = this.provider): String =
+        when (provider) {
+            LLMProvider.GEMINI -> state.geminiApiKey
+            LLMProvider.OPENAI -> state.openAiApiKey
+            LLMProvider.ANTHROPIC -> state.anthropicApiKey
+            LLMProvider.GROQ -> state.groqApiKey
+        }
+
+    fun setApiKey(
+        provider: LLMProvider = this.provider,
+        apiKey: String
+    ) {
+        when (provider) {
+            LLMProvider.GEMINI -> state.geminiApiKey = apiKey
+            LLMProvider.OPENAI -> state.openAiApiKey = apiKey
+            LLMProvider.ANTHROPIC -> state.anthropicApiKey = apiKey
+            LLMProvider.GROQ -> state.groqApiKey = apiKey
+        }
+    }
+
+    var currentApiKey: String
+        get() = getApiKey()
+        set(value) = setApiKey(apiKey = value)
 
     companion object {
         val instance: KodoPilotSettingsState
