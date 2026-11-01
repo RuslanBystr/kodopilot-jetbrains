@@ -1,45 +1,63 @@
-# kodopilot-plugin
+# Kodopilot for JetBrains IDEs
 
-![Build](https://github.com/RuslanBystr/kodopilot-plugin/workflows/Build/badge.svg)
+![Build](https://github.com/RuslanBystr/kodopilot-jetbrains/actions/workflows/build.yml/badge.svg)
+<!-- Uncomment after the first Marketplace release and replace MARKETPLACE_ID:
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
+-->
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [group](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml), [name](./src/main/resources/META-INF/plugin.xml), and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin [description](./src/main/resources/META-INF/plugin.xml) (see [Tips][docs:plugin-description]) and this README to describe what your plugin does.
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+<!-- Plugin description -->
+**Kodopilot** is an AI coding assistant for WebStorm and other JetBrains IDEs.
 
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+TODO: one or two sentences on what the plugin does and the problem it solves.
+
+**Features**
+- TODO: feature 1
+- TODO: feature 2
+- TODO: feature 3
+<!-- Plugin description end -->
 
 ## Installation
 
-- Using the IDE built-in plugin system:
+**From JetBrains Marketplace** *(after the first release)*
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "kodopilot-plugin"</kbd> >
-  <kbd>Install</kbd>
+<kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > search for <kbd>Kodopilot</kbd> > <kbd>Install</kbd>
 
-- Using JetBrains Marketplace:
+**Manually**
 
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
+Download the [latest release](https://github.com/RuslanBystr/kodopilot-jetbrains/releases/latest) and install it via
+<kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install Plugin from Disk...</kbd>
 
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+## Usage
 
-- Manually:
+TODO: how to open the plugin, main actions and shortcuts, a screenshot or GIF.
 
-  Download the [latest release](https://github.com/RuslanBystr/kodopilot-plugin/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+## Configuration
 
+TODO: settings (API key, model, etc.) and where to find them in <kbd>Settings</kbd>.
+
+## Development
+
+Requirements: JDK 21, IntelliJ IDEA (Community or Ultimate).
+
+```bash
+# Run an IDE sandbox with the plugin installed
+./gradlew runIde
+
+# Build the plugin ZIP (output: build/distributions/)
+./gradlew buildPlugin
+
+# Run tests and plugin verification
+./gradlew check verifyPlugin
+```
+
+## Compatibility
+
+TODO: supported IDE versions (see `pluginSinceBuild` in `gradle.properties`).
+
+## License
+
+TODO: license (e.g. MIT).
 
 ---
-Plugin based on the [IntelliJ Platform Plugin Template][template].
-
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
+Built with the [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template).
